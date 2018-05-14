@@ -1,4 +1,9 @@
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import java.awt.*;
 
 public class Interface {
 
@@ -18,13 +23,42 @@ public class Interface {
 
         JFrame jFrame = new JFrame();
 
-        //create table with data
-        JTable table = new JTable(data, columns);
+        final Class[] columnClass = new Class[] {
+                Integer.class, String.class, String.class, Double.class, String.class
+        };
 
+        DefaultTableModel model = new DefaultTableModel(data, columns) {
+            @Override
+            public boolean isCellEditable(int row, int column)
+            {
+                return false;
+            }
+            @Override
+            public Class<?> getColumnClass(int columnIndex)
+            {
+                return columnClass[columnIndex];
+            }
+        };
+        //create table with data
+        JTable table = new JTable(model){
+            DefaultTableCellRenderer renderLeft = new DefaultTableCellRenderer();
+
+            { // initializer block
+                renderLeft.setHorizontalAlignment(SwingConstants.LEFT);
+            }
+
+            @Override
+            public TableCellRenderer getCellRenderer (int arg0, int arg1) {
+                return renderLeft;
+            }
+
+        };
+
+        table.getTableHeader().setReorderingAllowed(false);
         //add the table to the frame
         jFrame.add(new JScrollPane(table));
 
-        jFrame.setTitle("Table Example");
+        jFrame.setTitle("List of clients");
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.pack();
         jFrame.setVisible(true);
