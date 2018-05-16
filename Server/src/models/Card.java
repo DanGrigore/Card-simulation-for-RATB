@@ -1,24 +1,29 @@
 package models;
+import models.Client;
 
 public class Card {
-    private int id;
+    private int card_id;
+    private Client person;
     private float card_money;
+    private String pass_type;
+    private float pass_price;
     private String expireDate;
     private int client_id;
 
-    public Card(int id, float card_money, String expireDate, int client_id) {
-        this.id = id;
-        this.card_money = card_money;
-        this.expireDate = expireDate;
-        this.client_id = client_id;
+    public int getCard_id() {
+        return card_id;
     }
 
-    public int getId() {
-        return id;
+    public void setCard_id(int card_id) {
+        this.card_id = card_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public Client getPerson() {
+        return person;
+    }
+
+    public void setPerson(Client person) {
+        this.person = person;
     }
 
     public float getCard_money() {
@@ -29,12 +34,36 @@ public class Card {
         this.card_money = card_money;
     }
 
+    public String getPass_type() {
+        return pass_type;
+    }
+
+    public void setPass_type(String pass_type) {
+        this.pass_type = pass_type;
+    }
+
+    public float getPass_price() {
+        return pass_price;
+    }
+
+    public void setPass_price(float pass_price) {
+        this.pass_price = pass_price;
+    }
+
     public String getExpireDate() {
         return expireDate;
     }
 
     public void setExpireDate(String expireDate) {
         this.expireDate = expireDate;
+    }
+
+    public int getClient_id() {
+        return client_id;
+    }
+
+    public void setClient_id(int client_id) {
+        this.client_id = client_id;
     }
 
 }

@@ -1,5 +1,8 @@
 package server;
 
+import models.Card;
+import models.Client;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -30,8 +33,7 @@ public class Server {
 
         public void run() {
             try {
-                DataBase db = new DataBase();
-                // db.connect("SELECT * FROM CLIENT");
+                DataBase db = DataBase.getInstance();
 
                 ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
                 Map welcome = new HashMap();
@@ -43,7 +45,17 @@ public class Server {
 
                 if (welcome.containsKey("afisare")) {
                     ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-                    out.writeObject(db.connect("SELECT * FROM CLIENT"));
+                    out.writeObject(db.printClients());
+                }
+
+                if (welcome.containsKey("addClient")) {
+                    Client newClient = (Client) welcome.get("addClient");
+                    db.createClient(newClient.getFirstName(), newClient.getLastName());
+                }
+
+                if(welcome.containsKey("chargePass")){
+                    Card card = (Card) welcome.get("chargePass");
+                    db.chargePass(card);
                 }
             } catch (IOException e) {
 
