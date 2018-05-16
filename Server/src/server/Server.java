@@ -1,3 +1,5 @@
+package server;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -6,7 +8,7 @@ import java.net.Socket;
 public class Server {
 
     public static void main(String[] args) throws Exception {
-        System.out.println("The server is running.");
+        System.out.println("Server running.");
         ServerSocket listener = new ServerSocket(7777);
         try {
             while (true) {
@@ -27,10 +29,10 @@ public class Server {
         public void run() {
             try {
                 DataBase db = new DataBase();
-                db.connect("SELECT * FROM CLIENT");
+               // db.connect("SELECT * FROM CLIENT");
 
-                DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-                out.writeUTF(db.connect("SELECT * FROM CLIENT"));
+                ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+                out.writeObject(db.connect("SELECT * FROM CLIENT"));
             } catch (IOException e) {
 
             } finally {
