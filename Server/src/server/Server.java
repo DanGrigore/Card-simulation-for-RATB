@@ -53,10 +53,25 @@ public class Server {
                     db.createClient(newClient.getFirstName(), newClient.getLastName());
                 }
 
-                if(welcome.containsKey("chargePass")){
+                if (welcome.containsKey("chargePass")) {
                     Card card = (Card) welcome.get("chargePass");
                     db.chargePass(card);
                 }
+
+                if (welcome.containsKey("validateCard")) {
+                    Card card = (Card) welcome.get("validateCard");
+                    db.validateCard(card);
+                }
+
+                if (welcome.containsKey("verifyCard")) {
+                    Card card = (Card) welcome.get("verifyCard");
+                    Boolean check = db.verifyCard(card);
+                    String validate = check.toString();
+                    try (DataOutputStream dout = new DataOutputStream(socket.getOutputStream())) {
+                        dout.writeUTF(validate);
+                    }
+                }
+
             } catch (IOException e) {
 
             } finally {

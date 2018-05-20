@@ -17,6 +17,7 @@ INSERT INTO TRANSPORT(line,type,charge_per_trip) VALUES(783,'express',3);
 INSERT INTO CARD_TYPE(pass_type,price,card_id) VALUES('abonament-lunar',25,7);
 INSERT INTO CARD_TYPE(pass_type,price,card_id) VALUES('abonament-zi',10,13);
 INSERT INTO CARD_TYPE(pass_type,price,card_id) VALUES('recharge',null,10);
+INSERT INTO CARD_TYPE(pass_type,price,card_id) VALUES('recharge',null,17);
 
 INSERT INTO VALIDATION(card_id,transport_id) VALUES(10,1);
 
@@ -26,7 +27,24 @@ DELETE FROM VALIDATION WHERE id = 3;
 
 SELECT * FROM CARD_TYPE;
 
+SELECT * FROM CLIENT cl, CARD cr, CARD_TYPE ct
+WHERE cl.client_id = cr.client_id
+AND cr.card_id = ct.card_id;
+
+
+SELECT *
+FROM CLIENT cl, CARD cr, CARD_TYPE ct
+WHERE cl.first_name ="Gigel" 
+	  AND cl.last_name = "Frone" 
+      AND cl.client_id = cr.client_id
+      AND ct.card_id = cr.card_id;
+
+SELECT * FROM CARD_TYPE;
+
+UPDATE CARD_TYPE SET pass_type = "abonament-lunar", price = 25 WHERE id = 12;
+
 SELECT * FROM CLIENT;
+
 SELECT * FROM CARD;
 
 UPDATE CARD SET card_money = card_money + 1 WHERE client_id = (SELECT client_id FROM CLIENT WHERE first_name = 'Alexandra' AND last_name = 'Gigica');

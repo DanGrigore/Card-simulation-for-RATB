@@ -11,6 +11,7 @@ public class Card implements Serializable{
     private float pass_price;
     private String expireDate;
     private int client_id;
+    private int line_validation;
 
     public int getCard_id() {
         return card_id;
@@ -68,4 +69,11 @@ public class Card implements Serializable{
         this.client_id = client_id;
     }
 
+    public int getLine_validation() {
+        return line_validation;
+    }
+
+    public void setLine_validation(int line_validation) {
+        this.line_validation = line_validation;
+    }
 }

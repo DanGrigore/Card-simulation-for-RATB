@@ -4,6 +4,11 @@ import models.Card;
 import models.Client;
 
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
 
 public class DataBase {
     private Connection myConn;
@@ -91,9 +96,9 @@ public class DataBase {
         person = card.getPerson();
 
         try (PreparedStatement ps = myConn.prepareStatement("SELECT cr.card_id FROM CLIENT cl, CARD cr WHERE cl.client_id = cr.client_id AND cl.first_name = ? AND cl.last_name = ?;");
-
              PreparedStatement ps2 = myConn.prepareStatement("UPDATE CARD_TYPE SET pass_type = ?, price = ? WHERE card_id = ?;");
-             PreparedStatement ps3 = myConn.prepareStatement("UPDATE CARD SET card_money = card_money + ? WHERE card_id = ?")) {
+             PreparedStatement ps3 = myConn.prepareStatement("UPDATE CARD SET card_money = card_money + ?, expire_on = null WHERE card_id = ?");
+             PreparedStatement ps4 = myConn.prepareStatement("UPDATE CARD SET card_money = 0, expire_on = CURDATE() + INTERVAL ? DAY  WHERE card_id = ?")) {
 
             ps.setString(1, person.getFirstName());
             ps.setString(2, person.getLastName());
@@ -106,10 +111,17 @@ public class DataBase {
                 ps2.setFloat(2, card.getPass_price());
                 ps2.setInt(3, card.getCard_id());
                 ps2.executeUpdate();
+
+                if (card.getPass_type().equals("abonament-lunar"))
+                    ps4.setInt(1, 30);
+                else
+                    ps4.setInt(1, 1);
+                ps4.setInt(2, card.getCard_id());
+                ps4.executeUpdate();
             } else {
-                ps2.setString(1,card.getPass_type());
-                ps2.setFloat(2,0);
-                ps2.setInt(3,card.getCard_id());
+                ps2.setString(1, card.getPass_type());
+                ps2.setFloat(2, 0);
+                ps2.setInt(3, card.getCard_id());
                 ps2.executeUpdate();
 
                 ps3.setFloat(1, card.getPass_price());
@@ -120,6 +132,91 @@ public class DataBase {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void validateCard(Card card) {
+        Client person = new Client();
+        person = card.getPerson();
+
+        try (PreparedStatement ps = myConn.prepareStatement("SELECT cr.card_id, cr.card_money, cr.expire_on, ct.pass_type FROM CLIENT cl, CARD cr, CARD_TYPE ct WHERE cl.client_id = cr.client_id AND cl.first_name = ? AND cl.last_name = ? AND ct.card_id = cr.card_id;");
+             PreparedStatement ps2 = myConn.prepareStatement("SELECT transport_id, charge_per_trip FROM TRANSPORT WHERE line = ?");
+             PreparedStatement ps3 = myConn.prepareStatement("INSERT INTO VALIDATION(card_id,transport_id,`date&time`) VALUES(?,?,NOW() + INTERVAL 3 HOUR);");
+             PreparedStatement ps4 = myConn.prepareStatement("UPDATE CARD SET card_money = card_money - ? WHERE card_id = ?")) {
+
+            ps.setString(1, person.getFirstName());
+            ps.setString(2, person.getLastName());
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            card.setCard_id(rs.getInt("cr.card_id"));
+            card.setCard_money(rs.getInt("cr.card_money"));
+            card.setPass_type(rs.getString("ct.pass_type"));
+            card.setExpireDate(rs.getString("cr.expire_on"));
+
+            ps2.setInt(1, card.getLine_validation());
+            ResultSet rs2 = ps2.executeQuery();
+            rs2.next();
+            int transportLine = rs2.getInt("transport_id");
+            int chargePerTrip = rs2.getInt("charge_per_trip");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+
+            if (card.getPass_type() != "recharge")
+                try {
+                    Date expireDate = (Date) format.parse(card.getExpireDate());
+                    Date todayDate = (Date) format.parse(LocalDate.now().toString());
+                    if (expireDate.compareTo(todayDate) >= 0) {
+                        ps3.setInt(1, card.getCard_id());
+                        ps3.setInt(2, transportLine);
+                        ps3.executeUpdate();
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            else {
+                if(card.getCard_money() >= chargePerTrip){
+                    ps3.setInt(1, card.getCard_id());
+                    ps3.setInt(2, transportLine);
+                    ps3.executeUpdate();
+
+                    ps4.setInt(1,chargePerTrip);
+                    ps4.setInt(2,card.getCard_id());
+                    ps4.executeUpdate();
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public Boolean verifyCard(Card card) {
+        Client person = new Client();
+        person = card.getPerson();
+
+        try (PreparedStatement ps = myConn.prepareStatement("SELECT cr.card_id FROM CLIENT cl, CARD cr WHERE cl.client_id = cr.client_id AND cl.first_name = ? AND cl.last_name = ?;");
+             PreparedStatement ps2 = myConn.prepareStatement("SELECT v.`date&time`, t.line FROM VALIDATION v, TRANSPORT t WHERE card_id = ? AND v.transport_id = t.transport_id")) {
+
+            ps.setString(1,person.getFirstName());
+            ps.setString(2,person.getLastName());
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            card.setCard_id(rs.getInt("cr.card_id"));
+
+            ps2.setInt(1,card.getCard_id());
+            ResultSet rs2 = ps2.executeQuery();
+            while(rs2.next()){
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String validationDate = sdf.format(rs2.getTimestamp("v.date&time"));
+                String now = LocalDate.now().toString();
+//                System.out.println(validationDate);
+                if(now.equals(validationDate))
+                    if(rs2.getInt("t.line") == card.getLine_validation())
+                        return true;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }
 
