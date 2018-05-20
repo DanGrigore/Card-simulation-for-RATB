@@ -25,8 +25,8 @@ public class ClientConnection {
 //        Map toServer = new HashMap();
 //        String whatToDo = "addClient";
 //        Client aux = new Client();
-//        aux.setFirstName("Gigel");
-//        aux.setLastName("Frone");
+//        aux.setFirstName("Dorel");
+//        aux.setLastName("After");
 //        toServer.put(whatToDo, aux);
 //        os = new ObjectOutputStream(socket.getOutputStream());
 //        os.writeObject(toServer);

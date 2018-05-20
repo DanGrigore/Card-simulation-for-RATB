@@ -53,26 +53,24 @@ public class DataBase {
 
     public void createClient(String firstName, String lastName) {
 
-        try {
-            PreparedStatement ps = myConn.prepareStatement("INSERT INTO CLIENT(first_name,last_name) VALUES(?,?);");
+        try ( PreparedStatement ps = myConn.prepareStatement("INSERT INTO CLIENT(first_name,last_name) VALUES(?,?);");
+              PreparedStatement ps2 = myConn.prepareStatement("SELECT client_id FROM CLIENT WHERE first_name = ? AND last_name = ?");
+              PreparedStatement ps3 = myConn.prepareStatement("INSERT INTO CARD(card_money,expire_on,client_id) VALUES(0,null,?);");){
+
             ps.setString(1, firstName);
             ps.setString(2, lastName);
             ps.executeUpdate();
 
-            PreparedStatement ps2 = myConn.prepareStatement("SELECT client_id FROM CLIENT WHERE first_name = ? AND last_name = ?");
             ps2.setString(1, firstName);
             ps2.setString(2, lastName);
             ResultSet rs = ps2.executeQuery();
             rs.next();
             int client_id = rs.getInt("client_id");
 
-            PreparedStatement ps3 = myConn.prepareStatement("INSERT INTO CARD(card_money,expire_on,client_id) VALUES(0,null,?);");
             ps3.setInt(1, client_id);
             ps3.executeUpdate();
 
-            ps.close();
-            ps2.close();
-            ps3.close();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
