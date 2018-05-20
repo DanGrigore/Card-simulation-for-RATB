@@ -1,7 +1,9 @@
 package models;
 import models.Client;
 
-public class Card {
+import java.io.Serializable;
+
+public class Card implements Serializable{
     private int card_id;
     private Client person;
     private float card_money;

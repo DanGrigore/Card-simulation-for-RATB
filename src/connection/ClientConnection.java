@@ -38,10 +38,11 @@ public class ClientConnection {
         String whatToDo = "chargePass";
         Card card = new Card();
         Client person = new Client();
-        person.setFirstName("test1");
-        person.setLastName("testt2");
+        person.setFirstName("Dorel");
+        person.setLastName("After");
         card.setPerson(person);
-        card.setPass_type("abonament-lunar");
+        card.setPass_type("recharge");
+        card.setPass_price(25);
 
         toServer.put(whatToDo, card);
         os = new ObjectOutputStream(socket.getOutputStream());
