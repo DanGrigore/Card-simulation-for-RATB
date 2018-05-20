@@ -7,3 +7,7 @@ This is a simulation app that let you do all the action a normal card could do:
 - edit the database from a user-friendly interface
 - adding a new customer to data base
 - check when the pass expires
+
+<h1 align="center">
+<img src="/img/db structure.png" width="45%" height="45%" alt="db structure"/>
+</h1>
