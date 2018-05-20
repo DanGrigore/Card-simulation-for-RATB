@@ -27,9 +27,12 @@ DELETE FROM VALIDATION WHERE id = 3;
 
 SELECT * FROM CARD_TYPE;
 
-SELECT * FROM CLIENT cl, CARD cr, CARD_TYPE ct
+SELECT * FROM CLIENT cl, CARD cr, CARD_TYPE ct, VALIDATION v
 WHERE cl.client_id = cr.client_id
-AND cr.card_id = ct.card_id;
+AND cr.card_id = ct.card_id
+AND v.card_id = cr.card_id;
+
+SELECT v.`date&time`, t.line FROM VALIDATION v, TRANSPORT t WHERE card_id = 17 AND v.transport_id = t.transport_id;
 
 
 SELECT *
@@ -48,6 +51,8 @@ SELECT * FROM CLIENT;
 SELECT * FROM CARD;
 
 UPDATE CARD SET card_money = card_money + 1 WHERE client_id = (SELECT client_id FROM CLIENT WHERE first_name = 'Alexandra' AND last_name = 'Gigica');
+
+INSERT INTO VALIDATION(card_id,transport_id,`date&time`) VALUES(?,?,CURRENT_TIMESTAMP());
 
 SELECT * FROM CLIENT;
 SELECT * FROM CARD;

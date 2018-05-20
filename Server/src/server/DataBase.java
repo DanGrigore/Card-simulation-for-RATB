@@ -4,11 +4,10 @@ import models.Card;
 import models.Client;
 
 import java.sql.*;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Calendar;
+
 
 public class DataBase {
     private Connection myConn;
@@ -172,13 +171,13 @@ public class DataBase {
                     e.printStackTrace();
                 }
             else {
-                if(card.getCard_money() >= chargePerTrip){
+                if (card.getCard_money() >= chargePerTrip) {
                     ps3.setInt(1, card.getCard_id());
                     ps3.setInt(2, transportLine);
                     ps3.executeUpdate();
 
-                    ps4.setInt(1,chargePerTrip);
-                    ps4.setInt(2,card.getCard_id());
+                    ps4.setInt(1, chargePerTrip);
+                    ps4.setInt(2, card.getCard_id());
                     ps4.executeUpdate();
                 }
             }
@@ -195,21 +194,21 @@ public class DataBase {
         try (PreparedStatement ps = myConn.prepareStatement("SELECT cr.card_id FROM CLIENT cl, CARD cr WHERE cl.client_id = cr.client_id AND cl.first_name = ? AND cl.last_name = ?;");
              PreparedStatement ps2 = myConn.prepareStatement("SELECT v.`date&time`, t.line FROM VALIDATION v, TRANSPORT t WHERE card_id = ? AND v.transport_id = t.transport_id")) {
 
-            ps.setString(1,person.getFirstName());
-            ps.setString(2,person.getLastName());
+            ps.setString(1, person.getFirstName());
+            ps.setString(2, person.getLastName());
             ResultSet rs = ps.executeQuery();
             rs.next();
             card.setCard_id(rs.getInt("cr.card_id"));
 
-            ps2.setInt(1,card.getCard_id());
+            ps2.setInt(1, card.getCard_id());
             ResultSet rs2 = ps2.executeQuery();
-            while(rs2.next()){
+            while (rs2.next()) {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 String validationDate = sdf.format(rs2.getTimestamp("v.date&time"));
                 String now = LocalDate.now().toString();
 //                System.out.println(validationDate);
-                if(now.equals(validationDate))
-                    if(rs2.getInt("t.line") == card.getLine_validation())
+                if (now.equals(validationDate))
+                    if (rs2.getInt("t.line") == card.getLine_validation())
                         return true;
             }
 

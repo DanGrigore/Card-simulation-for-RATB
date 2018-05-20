@@ -91,7 +91,10 @@ public class ClientConnection {
         os.writeObject(toServer);
 
         try (DataInputStream in = new DataInputStream(socket.getInputStream())) {
-            System.out.println(in.readUTF());
+            if (in.readUTF().equals("false"))
+                System.out.println("AMENDA!");
+            else
+                System.out.println("VALIDAT!");
         }
         /**
          * pana aici

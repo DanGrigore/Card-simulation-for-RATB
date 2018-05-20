@@ -31,11 +31,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Server.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Server.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/server/Server.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="422">
-              <caret line="72" column="17" lean-forward="true" selection-start-line="72" selection-start-column="17" selection-end-line="72" selection-end-column="17" />
+            <state relative-caret-position="1139">
+              <caret line="67" column="46" lean-forward="false" selection-start-line="67" selection-start-column="46" selection-end-line="67" selection-end-column="46" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#695#696#0" expanded="true" />
@@ -47,35 +47,34 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DataBase.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DataBase.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/server/DataBase.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="782">
-              <caret line="213" column="13" lean-forward="true" selection-start-line="213" selection-start-column="13" selection-end-line="213" selection-end-column="13" />
+            <state relative-caret-position="-3145">
+              <caret line="5" column="18" lean-forward="false" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <marker date="1526814261335" expanded="true" signature="1157:1177" ph="SELECT * FRO... CLIENT" />
-                <marker date="1526814261335" expanded="true" signature="1661:1713" ph="INSERT INTO CLIENT... " />
-                <marker date="1526814261335" expanded="true" signature="1780:1847" ph="SELECT clien... CLIENT" />
-                <marker date="1526814261335" expanded="true" signature="1961:2026" ph="INSERT INTO CARD... " />
-                <marker date="1526814261335" expanded="true" signature="2093:2137" ph="SELECT card_... CARD" />
-                <marker date="1526814261335" expanded="true" signature="2252:2324" ph="INSERT INTO CARD_TYPE... " />
-                <marker date="1526814261335" expanded="true" signature="3116:3156" ph="SELECT * FRO... CLIENT" />
-                <marker date="1526814261335" expanded="true" signature="3116:3157" ph="SELECT * FRO... CLIENT" />
-                <marker date="1526814261335" expanded="true" signature="3116:3191" ph="SELECT * FRO... CLIENT" />
-                <marker date="1526814261335" expanded="true" signature="3116:3234" ph="SELECT cr.ca... CLIENT" />
-                <marker date="1526814261335" expanded="true" signature="3301:3363" ph="UPDATE CARD_TYPE... " />
-                <marker date="1526814261335" expanded="true" signature="3301:3364" ph="UPDATE CARD_TYPE... " />
-                <marker date="1526814261335" expanded="true" signature="3431:3510" ph="UPDATE CARD... " />
-                <marker date="1526814261335" expanded="true" signature="3576:3665" ph="UPDATE CARD... " />
-                <marker date="1526814261335" expanded="true" signature="5024:5199" ph="SELECT cr.ca... CLIENT" />
-                <marker date="1526814261335" expanded="true" signature="5024:5227" ph="SELECT cr.ca... CLIENT" />
-                <marker date="1526814261335" expanded="true" signature="5294:5360" ph="SELECT trans... TRANSPORT" />
-                <marker date="1526814261335" expanded="true" signature="5426:5494" ph="INSERT INTO VALIDATION... " />
-                <marker date="1526814261335" expanded="true" signature="5426:5518" ph="INSERT INTO VALIDATION... " />
-                <marker date="1526814261335" expanded="true" signature="5585:5646" ph="UPDATE CARD... " />
-                <marker date="1526814261335" expanded="true" signature="7637:7755" ph="SELECT cr.ca... CLIENT" />
-                <marker date="1526814261335" expanded="true" signature="7822:7935" ph="SELECT `v.da... VALIDATION" />
+                <marker date="1526814786101" expanded="true" signature="1102:1122" ph="SELECT * FRO... CLIENT" />
+                <marker date="1526814786101" expanded="true" signature="1606:1658" ph="INSERT INTO CLIENT... " />
+                <marker date="1526814786101" expanded="true" signature="1725:1792" ph="SELECT clien... CLIENT" />
+                <marker date="1526814786101" expanded="true" signature="1906:1971" ph="INSERT INTO CARD... " />
+                <marker date="1526814786101" expanded="true" signature="2038:2082" ph="SELECT card_... CARD" />
+                <marker date="1526814786101" expanded="true" signature="2197:2269" ph="INSERT INTO CARD_TYPE... " />
+                <marker date="1526814786101" expanded="true" signature="3061:3101" ph="SELECT * FRO... CLIENT" />
+                <marker date="1526814786101" expanded="true" signature="3061:3102" ph="SELECT * FRO... CLIENT" />
+                <marker date="1526814786101" expanded="true" signature="3061:3136" ph="SELECT * FRO... CLIENT" />
+                <marker date="1526814786101" expanded="true" signature="3061:3179" ph="SELECT cr.ca... CLIENT" />
+                <marker date="1526814786101" expanded="true" signature="3246:3308" ph="UPDATE CARD_TYPE... " />
+                <marker date="1526814786101" expanded="true" signature="3246:3309" ph="UPDATE CARD_TYPE... " />
+                <marker date="1526814786101" expanded="true" signature="3376:3455" ph="UPDATE CARD... " />
+                <marker date="1526814786101" expanded="true" signature="3521:3610" ph="UPDATE CARD... " />
+                <marker date="1526814786101" expanded="true" signature="4969:5144" ph="SELECT cr.ca... CLIENT" />
+                <marker date="1526814786101" expanded="true" signature="4969:5172" ph="SELECT cr.ca... CLIENT" />
+                <marker date="1526814786101" expanded="true" signature="5239:5305" ph="SELECT trans... TRANSPORT" />
+                <marker date="1526814786101" expanded="true" signature="5371:5439" ph="INSERT INTO VALIDATION... " />
+                <marker date="1526814786101" expanded="true" signature="5371:5463" ph="INSERT INTO VALIDATION... " />
+                <marker date="1526814786101" expanded="true" signature="5530:5591" ph="UPDATE CARD... " />
+                <marker date="1526814786101" expanded="true" signature="7586:7704" ph="SELECT cr.ca... CLIENT" />
+                <marker date="1526814786101" expanded="true" signature="7771:7884" ph="SELECT `v.da... VALIDATION" />
               </folding>
             </state>
           </provider>
@@ -260,12 +259,12 @@
       <option name="presentableId" value="Default" />
       <updated>1526396556531</updated>
       <workItem from="1526396559823" duration="19510000" />
-      <workItem from="1526797201375" duration="14024000" />
+      <workItem from="1526797201375" duration="14571000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33534000" />
+    <option name="totallyTimeSpent" value="34081000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -277,7 +276,7 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24891305" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24891305" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -328,29 +327,28 @@
         <state relative-caret-position="1394">
           <caret line="85" column="51" lean-forward="true" selection-start-line="85" selection-start-column="51" selection-end-line="85" selection-end-column="51" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1526814261335" expanded="true" signature="1157:1177" ph="SELECT * FRO... CLIENT" />
-            <marker date="1526814261335" expanded="true" signature="1661:1713" ph="INSERT INTO CLIENT... " />
-            <marker date="1526814261335" expanded="true" signature="1780:1847" ph="SELECT clien... CLIENT" />
-            <marker date="1526814261335" expanded="true" signature="1961:2026" ph="INSERT INTO CARD... " />
-            <marker date="1526814261335" expanded="true" signature="2093:2137" ph="SELECT card_... CARD" />
-            <marker date="1526814261335" expanded="true" signature="2252:2324" ph="INSERT INTO CARD_TYPE... " />
-            <marker date="1526814261335" expanded="true" signature="3116:3156" ph="SELECT * FRO... CLIENT" />
-            <marker date="1526814261335" expanded="true" signature="3116:3157" ph="SELECT * FRO... CLIENT" />
-            <marker date="1526814261335" expanded="true" signature="3116:3191" ph="SELECT * FRO... CLIENT" />
-            <marker date="1526814261335" expanded="true" signature="3116:3234" ph="SELECT cr.ca... CLIENT" />
-            <marker date="1526814261335" expanded="true" signature="3301:3363" ph="UPDATE CARD_TYPE... " />
-            <marker date="1526814261335" expanded="true" signature="3301:3364" ph="UPDATE CARD_TYPE... " />
-            <marker date="1526814261335" expanded="true" signature="3431:3510" ph="UPDATE CARD... " />
-            <marker date="1526814261335" expanded="true" signature="3576:3665" ph="UPDATE CARD... " />
-            <marker date="1526814261335" expanded="true" signature="5024:5199" ph="SELECT cr.ca... CLIENT" />
-            <marker date="1526814261335" expanded="true" signature="5024:5227" ph="SELECT cr.ca... CLIENT" />
-            <marker date="1526814261335" expanded="true" signature="5294:5360" ph="SELECT trans... TRANSPORT" />
-            <marker date="1526814261335" expanded="true" signature="5426:5494" ph="INSERT INTO VALIDATION... " />
-            <marker date="1526814261335" expanded="true" signature="5426:5518" ph="INSERT INTO VALIDATION... " />
-            <marker date="1526814261335" expanded="true" signature="5585:5646" ph="UPDATE CARD... " />
-            <marker date="1526814261335" expanded="true" signature="7637:7755" ph="SELECT cr.ca... CLIENT" />
-            <marker date="1526814261335" expanded="true" signature="7822:7935" ph="SELECT `v.da... VALIDATION" />
+            <marker date="1526814786101" expanded="true" signature="1102:1122" ph="SELECT * FRO... CLIENT" />
+            <marker date="1526814786101" expanded="true" signature="1606:1658" ph="INSERT INTO CLIENT... " />
+            <marker date="1526814786101" expanded="true" signature="1725:1792" ph="SELECT clien... CLIENT" />
+            <marker date="1526814786101" expanded="true" signature="1906:1971" ph="INSERT INTO CARD... " />
+            <marker date="1526814786101" expanded="true" signature="2038:2082" ph="SELECT card_... CARD" />
+            <marker date="1526814786101" expanded="true" signature="2197:2269" ph="INSERT INTO CARD_TYPE... " />
+            <marker date="1526814786101" expanded="true" signature="3061:3101" ph="SELECT * FRO... CLIENT" />
+            <marker date="1526814786101" expanded="true" signature="3061:3102" ph="SELECT * FRO... CLIENT" />
+            <marker date="1526814786101" expanded="true" signature="3061:3136" ph="SELECT * FRO... CLIENT" />
+            <marker date="1526814786101" expanded="true" signature="3061:3179" ph="SELECT cr.ca... CLIENT" />
+            <marker date="1526814786101" expanded="true" signature="3246:3308" ph="UPDATE CARD_TYPE... " />
+            <marker date="1526814786101" expanded="true" signature="3246:3309" ph="UPDATE CARD_TYPE... " />
+            <marker date="1526814786101" expanded="true" signature="3376:3455" ph="UPDATE CARD... " />
+            <marker date="1526814786101" expanded="true" signature="3521:3610" ph="UPDATE CARD... " />
+            <marker date="1526814786101" expanded="true" signature="4969:5144" ph="SELECT cr.ca... CLIENT" />
+            <marker date="1526814786101" expanded="true" signature="4969:5172" ph="SELECT cr.ca... CLIENT" />
+            <marker date="1526814786101" expanded="true" signature="5239:5305" ph="SELECT trans... TRANSPORT" />
+            <marker date="1526814786101" expanded="true" signature="5371:5439" ph="INSERT INTO VALIDATION... " />
+            <marker date="1526814786101" expanded="true" signature="5371:5463" ph="INSERT INTO VALIDATION... " />
+            <marker date="1526814786101" expanded="true" signature="5530:5591" ph="UPDATE CARD... " />
+            <marker date="1526814786101" expanded="true" signature="7586:7704" ph="SELECT cr.ca... CLIENT" />
+            <marker date="1526814786101" expanded="true" signature="7771:7884" ph="SELECT `v.da... VALIDATION" />
           </folding>
         </state>
       </provider>
@@ -399,48 +397,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/server/DataBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3145">
+          <caret line="5" column="18" lean-forward="false" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
+          <folding>
+            <marker date="1526814786101" expanded="true" signature="1102:1122" ph="SELECT * FRO... CLIENT" />
+            <marker date="1526814786101" expanded="true" signature="1606:1658" ph="INSERT INTO CLIENT... " />
+            <marker date="1526814786101" expanded="true" signature="1725:1792" ph="SELECT clien... CLIENT" />
+            <marker date="1526814786101" expanded="true" signature="1906:1971" ph="INSERT INTO CARD... " />
+            <marker date="1526814786101" expanded="true" signature="2038:2082" ph="SELECT card_... CARD" />
+            <marker date="1526814786101" expanded="true" signature="2197:2269" ph="INSERT INTO CARD_TYPE... " />
+            <marker date="1526814786101" expanded="true" signature="3061:3101" ph="SELECT * FRO... CLIENT" />
+            <marker date="1526814786101" expanded="true" signature="3061:3102" ph="SELECT * FRO... CLIENT" />
+            <marker date="1526814786101" expanded="true" signature="3061:3136" ph="SELECT * FRO... CLIENT" />
+            <marker date="1526814786101" expanded="true" signature="3061:3179" ph="SELECT cr.ca... CLIENT" />
+            <marker date="1526814786101" expanded="true" signature="3246:3308" ph="UPDATE CARD_TYPE... " />
+            <marker date="1526814786101" expanded="true" signature="3246:3309" ph="UPDATE CARD_TYPE... " />
+            <marker date="1526814786101" expanded="true" signature="3376:3455" ph="UPDATE CARD... " />
+            <marker date="1526814786101" expanded="true" signature="3521:3610" ph="UPDATE CARD... " />
+            <marker date="1526814786101" expanded="true" signature="4969:5144" ph="SELECT cr.ca... CLIENT" />
+            <marker date="1526814786101" expanded="true" signature="4969:5172" ph="SELECT cr.ca... CLIENT" />
+            <marker date="1526814786101" expanded="true" signature="5239:5305" ph="SELECT trans... TRANSPORT" />
+            <marker date="1526814786101" expanded="true" signature="5371:5439" ph="INSERT INTO VALIDATION... " />
+            <marker date="1526814786101" expanded="true" signature="5371:5463" ph="INSERT INTO VALIDATION... " />
+            <marker date="1526814786101" expanded="true" signature="5530:5591" ph="UPDATE CARD... " />
+            <marker date="1526814786101" expanded="true" signature="7586:7704" ph="SELECT cr.ca... CLIENT" />
+            <marker date="1526814786101" expanded="true" signature="7771:7884" ph="SELECT `v.da... VALIDATION" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/server/Server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
-          <caret line="72" column="17" lean-forward="true" selection-start-line="72" selection-start-column="17" selection-end-line="72" selection-end-column="17" />
+        <state relative-caret-position="1139">
+          <caret line="67" column="46" lean-forward="false" selection-start-line="67" selection-start-column="46" selection-end-line="67" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#695#696#0" expanded="true" />
             <element signature="e#739#740#0" expanded="true" />
             <element signature="e#2724#2725#0" expanded="true" />
             <element signature="e#2775#2776#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/DataBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="782">
-          <caret line="213" column="13" lean-forward="true" selection-start-line="213" selection-start-column="13" selection-end-line="213" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1526814261335" expanded="true" signature="1157:1177" ph="SELECT * FRO... CLIENT" />
-            <marker date="1526814261335" expanded="true" signature="1661:1713" ph="INSERT INTO CLIENT... " />
-            <marker date="1526814261335" expanded="true" signature="1780:1847" ph="SELECT clien... CLIENT" />
-            <marker date="1526814261335" expanded="true" signature="1961:2026" ph="INSERT INTO CARD... " />
-            <marker date="1526814261335" expanded="true" signature="2093:2137" ph="SELECT card_... CARD" />
-            <marker date="1526814261335" expanded="true" signature="2252:2324" ph="INSERT INTO CARD_TYPE... " />
-            <marker date="1526814261335" expanded="true" signature="3116:3156" ph="SELECT * FRO... CLIENT" />
-            <marker date="1526814261335" expanded="true" signature="3116:3157" ph="SELECT * FRO... CLIENT" />
-            <marker date="1526814261335" expanded="true" signature="3116:3191" ph="SELECT * FRO... CLIENT" />
-            <marker date="1526814261335" expanded="true" signature="3116:3234" ph="SELECT cr.ca... CLIENT" />
-            <marker date="1526814261335" expanded="true" signature="3301:3363" ph="UPDATE CARD_TYPE... " />
-            <marker date="1526814261335" expanded="true" signature="3301:3364" ph="UPDATE CARD_TYPE... " />
-            <marker date="1526814261335" expanded="true" signature="3431:3510" ph="UPDATE CARD... " />
-            <marker date="1526814261335" expanded="true" signature="3576:3665" ph="UPDATE CARD... " />
-            <marker date="1526814261335" expanded="true" signature="5024:5199" ph="SELECT cr.ca... CLIENT" />
-            <marker date="1526814261335" expanded="true" signature="5024:5227" ph="SELECT cr.ca... CLIENT" />
-            <marker date="1526814261335" expanded="true" signature="5294:5360" ph="SELECT trans... TRANSPORT" />
-            <marker date="1526814261335" expanded="true" signature="5426:5494" ph="INSERT INTO VALIDATION... " />
-            <marker date="1526814261335" expanded="true" signature="5426:5518" ph="INSERT INTO VALIDATION... " />
-            <marker date="1526814261335" expanded="true" signature="5585:5646" ph="UPDATE CARD... " />
-            <marker date="1526814261335" expanded="true" signature="7637:7755" ph="SELECT cr.ca... CLIENT" />
-            <marker date="1526814261335" expanded="true" signature="7822:7935" ph="SELECT `v.da... VALIDATION" />
           </folding>
         </state>
       </provider>
