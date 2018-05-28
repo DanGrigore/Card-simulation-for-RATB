@@ -60,6 +60,10 @@ SELECT * FROM TRANSPORT;
 SELECT * FROM CARD_TYPE;
 SELECT * FROM VALIDATION;
 
+DELETE FROM CARD_TYPE WHERE type_id = 22;
+DELETE FROM CARD WHERE card_id = 26;
+DELETE FROM CLIENT WHERE client_id = 19;
+
 SELECT * FROM CLIENT c, CARD  cs
 where c.client_id = cs.client_id AND c.first_name = 'Dan' AND c.last_name = 'Grigore'
 ORDER BY first_name;
@@ -70,7 +74,7 @@ ORDER BY first_name;
 
 SELECT * FROM CLIENT c, CARD  cs
 where c.client_id = cs.client_id 
-ORDER BY first_name;
+ORDER BY cs.card_id DESC;
 
 SELECT * FROM CARD c, CLIENT cl WHERE c.client_id = cl.client_id AND cl.first_name = 'Dan' AND cl.last_name = 'Grigore';
 

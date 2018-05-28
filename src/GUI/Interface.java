@@ -24,11 +24,13 @@ public class Interface {
     private JLabel statusLabel;
     private Socket socket;
     private ObjectOutputStream os;
+    private DataInputStream din;
     private Map<String, java.io.Serializable> toServer;
 
     public Interface(Socket socket) throws IOException {
         this.socket = socket;
         os = new ObjectOutputStream(socket.getOutputStream());
+        din = new DataInputStream(socket.getInputStream());
         prepareGUI();
     }
 
@@ -42,7 +44,7 @@ public class Interface {
         statusLabel = new JLabel("", JLabel.CENTER);
 
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.setBounds(100, 100, 550, 550);
+        mainFrame.setBounds(100, 100, 550, 570);
 //        mainFrame.addWindowListener(new WindowAdapter() {
 //            public void windowClosing(WindowEvent windowEvent){
 //                System.exit(0);
@@ -265,7 +267,7 @@ public class Interface {
         });
 
         /**
-         * Forth card (verify)
+         * Fourth card (verify)
          */
         JPanel verifyCardPanel = new JPanel();
         Border borderVerifyCardPanel = verifyCardPanel.getBorder();
@@ -282,7 +284,7 @@ public class Interface {
         c.gridx = 1;
 
         JComboBox<String> linesList2 = new JComboBox<>(lines);
-        linesList.setSelectedIndex(0);
+        linesList2.setSelectedIndex(0);
         verifyCardPanel.add(linesList2, c);
 
         JButton doneBtnVrC = new JButton("Done");
@@ -304,11 +306,10 @@ public class Interface {
 
                 toServer.put(whatToDo, card);
                 dataForServer();
-                System.out.println("Validation made");
                 toServer.clear();
 
-                try (DataInputStream in = new DataInputStream(socket.getInputStream())) {
-                    if (in.readUTF().equals("false")) {
+                try {
+                    if (din.readUTF().equals("false")) {
                         statusLabel.setForeground(Color.RED);
                         statusLabel.setText("AMENDA!");
                     } else {

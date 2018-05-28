@@ -35,54 +35,55 @@ public class Server {
         }
 
         public void run() {
-            try {
-                DataBase db = DataBase.getInstance();
-
-                welcome = new HashMap();
+            DataBase db = DataBase.getInstance();
+            while (true)
                 try {
-                    welcome = (HashMap) in.readObject();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-
-                if (welcome.containsKey("afisare")) {
-                    ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-                    out.writeObject(db.printClients());
-                }
-
-                if (welcome.containsKey("addClient")) {
-                    Client newClient = (Client) welcome.get("addClient");
-                    db.createClient(newClient.getFirstName(), newClient.getLastName());
-                    System.out.println("New Client");
-                }
-
-                if (welcome.containsKey("chargePass")) {
-                    Card card = (Card) welcome.get("chargePass");
-                    db.chargePass(card);
-                    System.out.println("Pass created");
-                }
-
-                if (welcome.containsKey("validateCard")) {
-                    Card card = (Card) welcome.get("validateCard");
-                    db.validateCard(card);
-                    System.out.println("Validation made");
-                }
-
-                if (welcome.containsKey("verifyCard")) {
-                    Card card = (Card) welcome.get("verifyCard");
-                    Boolean check = db.verifyCard(card);
-                    String validate = check.toString();
-                    try (DataOutputStream dout = new DataOutputStream(socket.getOutputStream())) {
-                        dout.writeUTF(validate);
+                    welcome = new HashMap();
+                    try {
+                        welcome = (HashMap) in.readObject();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
                     }
-                    System.out.println("Card verified");
-                }
-                welcome.clear();
+
+                    if (welcome.containsKey("afisare")) {
+                        ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+                        out.writeObject(db.printClients());
+                    }
+
+                    if (welcome.containsKey("addClient")) {
+                        Client newClient = (Client) welcome.get("addClient");
+                        db.createClient(newClient.getFirstName(), newClient.getLastName());
+                        System.out.println("New Client");
+                    }
+
+                    if (welcome.containsKey("chargePass")) {
+                        Card card = (Card) welcome.get("chargePass");
+                        db.chargePass(card);
+                        System.out.println("Pass created");
+                    }
+
+                    if (welcome.containsKey("validateCard")) {
+                        Card card = (Card) welcome.get("validateCard");
+                        db.validateCard(card);
+                        System.out.println("Validation made");
+                    }
+
+                    if (welcome.containsKey("verifyCard")) {
+                        Card card = (Card) welcome.get("verifyCard");
+                        Boolean check = db.verifyCard(card);
+                        String validate = check.toString();
+                        try  {
+                            DataOutputStream dout = new DataOutputStream(socket.getOutputStream());
+                            dout.writeUTF(validate);
+                        } catch(Exception e){}
+                        System.out.println("Card verified");
+                    }
+                    welcome.clear();
 
 
-            } catch (IOException e) {
+                } catch (IOException e) {
 
-            } /*finally {
+                } /*finally {
                 try {
                     socket.close();
                 } catch (IOException e) {
