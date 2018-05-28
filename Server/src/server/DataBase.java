@@ -59,10 +59,8 @@ public class DataBase {
 
         try (PreparedStatement ps = myConn.prepareStatement("INSERT INTO CLIENT(first_name,last_name) VALUES(?,?);");
              PreparedStatement ps2 = myConn.prepareStatement("SELECT client_id FROM CLIENT WHERE first_name = ? AND last_name = ?");
-             ResultSet rs = ps2.executeQuery();
              PreparedStatement ps3 = myConn.prepareStatement("INSERT INTO CARD(card_money,expire_on,client_id) VALUES(0,null,?);");
              PreparedStatement ps4 = myConn.prepareStatement("SELECT card_id FROM CARD WHERE client_id = ?");
-             ResultSet rs2 = ps4.executeQuery();
              PreparedStatement ps5 = myConn.prepareStatement("INSERT INTO CARD_TYPE(pass_type,price,card_id) VALUES('recharge',null,?);")) {
 
             ps.setString(1, firstName);
@@ -71,6 +69,7 @@ public class DataBase {
 
             ps2.setString(1, firstName);
             ps2.setString(2, lastName);
+            ResultSet rs = ps2.executeQuery();
 
             rs.next();
             int client_id = rs.getInt("client_id");
@@ -79,11 +78,14 @@ public class DataBase {
             ps3.executeUpdate();
 
             ps4.setInt(1, client_id);
+            ResultSet rs2 = ps4.executeQuery();
             rs2.next();
             int card_id = rs2.getInt("card_id");
+
             ps5.setInt(1, card_id);
             ps5.executeUpdate();
 
+            System.out.println("DB UPDATED");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -105,13 +107,13 @@ public class DataBase {
             rs.next();
             card.setCard_id(rs.getInt("card_id"));
 
-            if (!card.getPass_type().equals("recharge")) {
+            if (!card.getPass_type().equals("Rechargeable")) {
                 ps2.setString(1, card.getPass_type());
                 ps2.setFloat(2, card.getPass_price());
                 ps2.setInt(3, card.getCard_id());
                 ps2.executeUpdate();
 
-                if (card.getPass_type().equals("abonament-lunar"))
+                if (card.getPass_type().equals("Monthly Pass"))
                     ps4.setInt(1, 30);
                 else
                     ps4.setInt(1, 1);
@@ -158,7 +160,7 @@ public class DataBase {
             int chargePerTrip = rs2.getInt("charge_per_trip");
             SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
 
-            if (card.getPass_type() != "recharge")
+            if (!card.getPass_type().equals("Rechargeable"))
                 try {
                     Date expireDate = (Date) format.parse(card.getExpireDate());
                     Date todayDate = (Date) format.parse(LocalDate.now().toString());

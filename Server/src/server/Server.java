@@ -26,17 +26,19 @@ public class Server {
 
     private static class ServerConnection extends Thread {
         private Socket socket;
+        private ObjectInputStream in;
+        private Map welcome;
 
-        public ServerConnection(Socket socket) {
+        public ServerConnection(Socket socket) throws IOException {
             this.socket = socket;
+            in = new ObjectInputStream(socket.getInputStream());
         }
 
         public void run() {
             try {
                 DataBase db = DataBase.getInstance();
 
-                ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
-                Map welcome = new HashMap();
+                welcome = new HashMap();
                 try {
                     welcome = (HashMap) in.readObject();
                 } catch (ClassNotFoundException e) {
@@ -51,11 +53,13 @@ public class Server {
                 if (welcome.containsKey("addClient")) {
                     Client newClient = (Client) welcome.get("addClient");
                     db.createClient(newClient.getFirstName(), newClient.getLastName());
+                    System.out.println("New Client");
                 }
 
                 if (welcome.containsKey("chargePass")) {
                     Card card = (Card) welcome.get("chargePass");
                     db.chargePass(card);
+                    System.out.println(card.getPerson().getFirstName());
                 }
 
                 if (welcome.containsKey("validateCard")) {
@@ -71,20 +75,18 @@ public class Server {
                         dout.writeUTF(validate);
                     }
                 }
+                welcome.clear();
 
             } catch (IOException e) {
 
-            } finally {
+            } /*finally {
                 try {
                     socket.close();
                 } catch (IOException e) {
                     log("Couldn't close a socket");
                 }
-            }
+            }*/
         }
 
-        private void log(String message) {
-            System.out.println(message);
-        }
     }
 }
