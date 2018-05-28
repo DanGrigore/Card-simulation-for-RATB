@@ -85,7 +85,7 @@ public class DataBase {
             ps5.setInt(1, card_id);
             ps5.executeUpdate();
 
-            System.out.println("DB UPDATED");
+            System.out.print("DB UPDATED - ");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -129,6 +129,7 @@ public class DataBase {
                 ps3.setInt(2, card.getCard_id());
                 ps3.executeUpdate();
             }
+            System.out.print("DB UPDATED - ");
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -183,6 +184,7 @@ public class DataBase {
                     ps4.executeUpdate();
                 }
             }
+            System.out.print("DB UPDATED - ");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -213,7 +215,7 @@ public class DataBase {
                     if (rs2.getInt("t.line") == card.getLine_validation())
                         return true;
             }
-
+            System.out.print("DB UPDATED - ");
         } catch (SQLException e) {
             e.printStackTrace();
         }

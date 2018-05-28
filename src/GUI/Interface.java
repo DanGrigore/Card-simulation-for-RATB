@@ -110,6 +110,7 @@ public class Interface {
         c.gridx = 0;
         c.gridy = 2;
         c.weighty = 10;
+
         /**
          * First card (add)
          */
@@ -126,10 +127,11 @@ public class Interface {
 
         addCardPanel.add(doneBtnAC, c);
 
+
         doneBtnAC.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e){
-                toServer = new HashMap<String, java.io.Serializable>();
+            public void actionPerformed(ActionEvent e) {
+                toServer = new HashMap<>();
                 String whatToDo = "addClient";
                 Client aux = new Client();
                 aux.setFirstName(firstNameAC.getText());
@@ -138,6 +140,8 @@ public class Interface {
 
                 dataForServer();
                 System.out.println("New card created");
+                statusLabel.setForeground(Color.GREEN);
+                statusLabel.setText("NEW CARD CREATED");
                 toServer.clear();
             }
         });
@@ -206,6 +210,8 @@ public class Interface {
                 toServer.put(whatToDo, card);
                 dataForServer();
                 System.out.println("Recharge made");
+                statusLabel.setForeground(Color.GREEN);
+                statusLabel.setText("TRANSFER SUCCESSFUL!");
                 toServer.clear();
             }
         });
@@ -252,6 +258,8 @@ public class Interface {
                 toServer.put(whatToDo, card);
                 dataForServer();
                 System.out.println("Validation made");
+                statusLabel.setForeground(Color.GREEN);
+                statusLabel.setText("VALIDATION SUCCESSFUL!");
                 toServer.clear();
             }
         });
@@ -300,10 +308,13 @@ public class Interface {
                 toServer.clear();
 
                 try (DataInputStream in = new DataInputStream(socket.getInputStream())) {
-                    if (in.readUTF().equals("false"))
+                    if (in.readUTF().equals("false")) {
+                        statusLabel.setForeground(Color.RED);
                         statusLabel.setText("AMENDA!");
-                    else
+                    } else {
+                        statusLabel.setForeground(Color.GREEN);
                         statusLabel.setText("VALIDAT!");
+                    }
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -319,15 +330,27 @@ public class Interface {
         contentPanel.add("ValidateCard", validateCardPanel);
         contentPanel.add("VerifyCard", verifyCardPanel);
 
-        addButton.addActionListener(e -> setCardLayout(contentPanel, "AddCard"));
-        rechargeButton.addActionListener(e -> setCardLayout(contentPanel, "RechargeCard"));
-        validateButton.addActionListener(e -> setCardLayout(contentPanel, "ValidateCard"));
-        verifyButton.addActionListener(e -> setCardLayout(contentPanel, "VerifyCard"));
+        addButton.addActionListener(e -> {
+            setCardLayout(contentPanel, "AddCard");
+            statusLabel.setText("");
+        });
+        rechargeButton.addActionListener(e -> {
+            setCardLayout(contentPanel, "RechargeCard");
+            statusLabel.setText("");
+        });
+        validateButton.addActionListener(e -> {
+            setCardLayout(contentPanel, "ValidateCard");
+            statusLabel.setText("");
+        });
+        verifyButton.addActionListener(e -> {
+            setCardLayout(contentPanel, "VerifyCard");
+            statusLabel.setText("");
+        });
 
 
         controlPanel.add(contentPanel);
         controlPanel.add(statusLabel);
-        statusLabel.setText("ALOHA");
+        //statusLabel.setText("ALOHA");
 
         mainFrame.setVisible(true);
     }

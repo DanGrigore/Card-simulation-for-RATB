@@ -59,12 +59,13 @@ public class Server {
                 if (welcome.containsKey("chargePass")) {
                     Card card = (Card) welcome.get("chargePass");
                     db.chargePass(card);
-                    System.out.println(card.getPerson().getFirstName());
+                    System.out.println("Pass created");
                 }
 
                 if (welcome.containsKey("validateCard")) {
                     Card card = (Card) welcome.get("validateCard");
                     db.validateCard(card);
+                    System.out.println("Validation made");
                 }
 
                 if (welcome.containsKey("verifyCard")) {
@@ -74,8 +75,10 @@ public class Server {
                     try (DataOutputStream dout = new DataOutputStream(socket.getOutputStream())) {
                         dout.writeUTF(validate);
                     }
+                    System.out.println("Card verified");
                 }
                 welcome.clear();
+
 
             } catch (IOException e) {
 
