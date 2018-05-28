@@ -1,24 +1,21 @@
 package connection;
 
-import models.Client;
-import models.Card;
+import GUI.Interface;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.HashMap;
-import java.util.Map;
+
 
 public class ClientConnection {
 
-    private ObjectInputStream in;
-    private ObjectOutputStream os;
 
 
     public void connectToServer() throws IOException, ClassNotFoundException {
 
         // Make connection and initialize streams
         Socket socket = new Socket("localhost", 7777);
-
+        Interface graphics = new Interface(socket);
+        graphics.showContent();
 //        /**
 //         * Add client works
 //         */
@@ -77,25 +74,25 @@ public class ClientConnection {
         /**
          *  Verify card
          */
-        Map toServer = new HashMap();
-        String whatToDo = "verifyCard";
-        Card card = new Card();
-        Client person = new Client();
-        person.setFirstName("Dorel");
-        person.setLastName("After");
-        card.setPerson(person);
-        card.setLine_validation(41);
-
-        toServer.put(whatToDo, card);
-        os = new ObjectOutputStream(socket.getOutputStream());
-        os.writeObject(toServer);
-
-        try (DataInputStream in = new DataInputStream(socket.getInputStream())) {
-            if (in.readUTF().equals("false"))
-                System.out.println("AMENDA!");
-            else
-                System.out.println("VALIDAT!");
-        }
+//        Map toServer = new HashMap();
+//        String whatToDo = "verifyCard";
+//        Card card = new Card();
+//        Client person = new Client();
+//        person.setFirstName("Dorel");
+//        person.setLastName("After");
+//        card.setPerson(person);
+//        card.setLine_validation(41);
+//
+//        toServer.put(whatToDo, card);
+//        os = new ObjectOutputStream(socket.getOutputStream());
+//        os.writeObject(toServer);
+//
+//        try (DataInputStream in = new DataInputStream(socket.getInputStream())) {
+//            if (in.readUTF().equals("false"))
+//                System.out.println("AMENDA!");
+//            else
+//                System.out.println("VALIDAT!");
+//        }
         /**
          * pana aici
          */
@@ -115,9 +112,8 @@ public class ClientConnection {
 //                System.out.println("Oops");
 //        }
 //        in.close();
-        os.close();
-        toServer.clear();
-        socket.close();
+
+        //socket.close();
     }
 
 
