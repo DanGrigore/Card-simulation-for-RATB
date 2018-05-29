@@ -8,8 +8,8 @@ import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -37,19 +37,24 @@ public class Interface {
 
     private void prepareGUI() {
         mainFrame = new JFrame("RATB PASS");
-        //mainFrame.setSize(550,550);
         mainFrame.setLayout(new GridLayout(2, 1));
 
         headerLabel = new JLabel("", JLabel.CENTER);
         statusLabel = new JLabel("", JLabel.CENTER);
 
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       // mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setBounds(100, 100, 550, 570);
-//        mainFrame.addWindowListener(new WindowAdapter() {
-//            public void windowClosing(WindowEvent windowEvent){
-//                System.exit(0);
-//            }
-//        });
+        mainFrame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent windowEvent){
+                try {
+                    os.close();
+                    socket.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.exit(0);
+            }
+        });
         controlPanel = new JPanel();
         controlPanel.setLayout(new FlowLayout());
 
@@ -59,7 +64,7 @@ public class Interface {
         mainFrame.setVisible(true);
     }
 
-    public void showContent() throws IOException {
+    public void showContent() {
         headerLabel.setText("Choose an action:");
         JPanel panel = new JPanel();
 
@@ -89,8 +94,6 @@ public class Interface {
          * Card Layout for input data
          */
         final JPanel contentPanel = new JPanel();
-        contentPanel.setBackground(Color.BLACK);
-        // contentPanel.setSize(500,300);
         contentPanel.setPreferredSize(new Dimension(500, 200));
 
         CardLayout layout2 = new CardLayout();
@@ -130,22 +133,19 @@ public class Interface {
         addCardPanel.add(doneBtnAC, c);
 
 
-        doneBtnAC.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                toServer = new HashMap<>();
-                String whatToDo = "addClient";
-                Client aux = new Client();
-                aux.setFirstName(firstNameAC.getText());
-                aux.setLastName(lastNameAC.getText());
-                toServer.put(whatToDo, aux);
+        doneBtnAC.addActionListener(e -> {
+            toServer = new HashMap<>();
+            String whatToDo = "addClient";
+            Client aux = new Client();
+            aux.setFirstName(firstNameAC.getText());
+            aux.setLastName(lastNameAC.getText());
+            toServer.put(whatToDo, aux);
 
-                dataForServer();
-                System.out.println("New card created");
-                statusLabel.setForeground(Color.GREEN);
-                statusLabel.setText("NEW CARD CREATED");
-                toServer.clear();
-            }
+            dataForServer();
+            System.out.println("New card created");
+            statusLabel.setForeground(Color.GREEN);
+            statusLabel.setText("NEW CARD CREATED");
+            toServer.clear();
         });
 
         /**
@@ -196,26 +196,23 @@ public class Interface {
         c.gridx = 0;
         rechargeCardPanel.add(doneBtnRC, c);
 
-        doneBtnRC.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                toServer = new HashMap<>();
-                String whatToDo = "chargePass";
-                Card card = new Card();
-                Client person = new Client();
-                person.setFirstName(firstNameRC.getText());
-                person.setLastName(lastNameRC.getText());
-                card.setPerson(person);
-                card.setPass_type(passList.getItemAt(passList.getSelectedIndex()));
-                card.setPass_price(Integer.parseInt(priceRC.getText()));
+        doneBtnRC.addActionListener(e -> {
+            toServer = new HashMap<>();
+            String whatToDo = "chargePass";
+            Card card = new Card();
+            Client person = new Client();
+            person.setFirstName(firstNameRC.getText());
+            person.setLastName(lastNameRC.getText());
+            card.setPerson(person);
+            card.setPass_type(passList.getItemAt(passList.getSelectedIndex()));
+            card.setPass_price(Integer.parseInt(priceRC.getText()));
 
-                toServer.put(whatToDo, card);
-                dataForServer();
-                System.out.println("Recharge made");
-                statusLabel.setForeground(Color.GREEN);
-                statusLabel.setText("TRANSFER SUCCESSFUL!");
-                toServer.clear();
-            }
+            toServer.put(whatToDo, card);
+            dataForServer();
+            System.out.println("Recharge made");
+            statusLabel.setForeground(Color.GREEN);
+            statusLabel.setText("TRANSFER SUCCESSFUL!");
+            toServer.clear();
         });
 
         /**
@@ -245,25 +242,22 @@ public class Interface {
         c.gridx = 0;
         validateCardPanel.add(doneBtnVC, c);
 
-        doneBtnVC.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                toServer = new HashMap();
-                String whatToDo = "validateCard";
-                Card card = new Card();
-                Client person = new Client();
-                person.setFirstName(firstNameVC.getText());
-                person.setLastName(lastNameVC.getText());
-                card.setPerson(person);
-                card.setLine_validation(Integer.parseInt(linesList.getItemAt(linesList.getSelectedIndex())));
+        doneBtnVC.addActionListener(e -> {
+            toServer = new HashMap();
+            String whatToDo = "validateCard";
+            Card card = new Card();
+            Client person = new Client();
+            person.setFirstName(firstNameVC.getText());
+            person.setLastName(lastNameVC.getText());
+            card.setPerson(person);
+            card.setLine_validation(Integer.parseInt(linesList.getItemAt(linesList.getSelectedIndex())));
 
-                toServer.put(whatToDo, card);
-                dataForServer();
-                System.out.println("Validation made");
-                statusLabel.setForeground(Color.GREEN);
-                statusLabel.setText("VALIDATION SUCCESSFUL!");
-                toServer.clear();
-            }
+            toServer.put(whatToDo, card);
+            dataForServer();
+            System.out.println("Validation made");
+            statusLabel.setForeground(Color.GREEN);
+            statusLabel.setText("VALIDATION SUCCESSFUL!");
+            toServer.clear();
         });
 
         /**
@@ -292,40 +286,34 @@ public class Interface {
         c.gridx = 0;
         verifyCardPanel.add(doneBtnVrC, c);
 
-        doneBtnVrC.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                toServer = new HashMap();
-                String whatToDo = "verifyCard";
-                Card card = new Card();
-                Client person = new Client();
-                person.setFirstName(firstNameVrC.getText());
-                person.setLastName(lastNameVrC.getText());
-                card.setPerson(person);
-                card.setLine_validation(Integer.parseInt(linesList2.getItemAt(linesList2.getSelectedIndex())));
+        doneBtnVrC.addActionListener(e -> {
+            toServer = new HashMap();
+            String whatToDo = "verifyCard";
+            Card card = new Card();
+            Client person = new Client();
+            person.setFirstName(firstNameVrC.getText());
+            person.setLastName(lastNameVrC.getText());
+            card.setPerson(person);
+            card.setLine_validation(Integer.parseInt(linesList2.getItemAt(linesList2.getSelectedIndex())));
 
-                toServer.put(whatToDo, card);
-                dataForServer();
-                toServer.clear();
+            toServer.put(whatToDo, card);
+            dataForServer();
+            toServer.clear();
 
-                try {
-                    if (din.readUTF().equals("false")) {
-                        statusLabel.setForeground(Color.RED);
-                        statusLabel.setText("AMENDA!");
-                    } else {
-                        statusLabel.setForeground(Color.GREEN);
-                        statusLabel.setText("VALIDAT!");
-                    }
-                } catch (IOException e1) {
-                    e1.printStackTrace();
+            try {
+                if (din.readUTF().equals("false")) {
+                    statusLabel.setForeground(Color.RED);
+                    statusLabel.setText("AMENDA!");
+                } else {
+                    statusLabel.setForeground(Color.GREEN);
+                    statusLabel.setText("VALIDAT!");
                 }
-                System.out.println("Verification made");
+            } catch (IOException e1) {
+                e1.printStackTrace();
             }
+            System.out.println("Verification made");
         });
 
-        /**
-         * Choose the cardLayout
-         */
         contentPanel.add("AddCard", addCardPanel);
         contentPanel.add("RechargeCard", rechargeCardPanel);
         contentPanel.add("ValidateCard", validateCardPanel);
@@ -351,15 +339,12 @@ public class Interface {
 
         controlPanel.add(contentPanel);
         controlPanel.add(statusLabel);
-        //statusLabel.setText("ALOHA");
-
         mainFrame.setVisible(true);
     }
 
     private void dataForServer() {
         try {
             os.writeObject(toServer);
-            //os.close();
         } catch (IOException e1) {
             e1.printStackTrace();
         }

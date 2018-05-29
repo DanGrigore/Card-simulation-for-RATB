@@ -65,7 +65,7 @@ DELETE FROM CARD WHERE card_id = 26;
 DELETE FROM CLIENT WHERE client_id = 19;
 
 SELECT * FROM CLIENT c, CARD  cs
-where c.client_id = cs.client_id AND c.first_name = 'Dan' AND c.last_name = 'Grigore'
+where c.client_id = cs.client_id AND c.first_name = 'Dan' AND c.last_name = 'Andrei'
 ORDER BY first_name;
 
 SELECT * FROM CLIENT c, CARD  cs, TRANSPORT t, VALIDATION v, CARD_TYPE ct

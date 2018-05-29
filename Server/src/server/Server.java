@@ -14,13 +14,10 @@ public class Server {
 
     public static void main(String[] args) throws Exception {
         System.out.println("Server running.");
-        ServerSocket listener = new ServerSocket(7777);
-        try {
+        try (ServerSocket listener = new ServerSocket(7777)) {
             while (true) {
                 new ServerConnection(listener.accept()).start();
             }
-        } finally {
-            listener.close();
         }
     }
 
@@ -30,14 +27,15 @@ public class Server {
         private Map welcome;
 
         public ServerConnection(Socket socket) throws IOException {
+            System.out.println("A client entered");
             this.socket = socket;
             in = new ObjectInputStream(socket.getInputStream());
         }
 
         public void run() {
             DataBase db = DataBase.getInstance();
-            while (true)
-                try {
+            try {
+                while (true) {
                     welcome = new HashMap();
                     try {
                         welcome = (HashMap) in.readObject();
@@ -72,24 +70,25 @@ public class Server {
                         Card card = (Card) welcome.get("verifyCard");
                         Boolean check = db.verifyCard(card);
                         String validate = check.toString();
-                        try  {
+                        try {
                             DataOutputStream dout = new DataOutputStream(socket.getOutputStream());
                             dout.writeUTF(validate);
-                        } catch(Exception e){}
+                        } catch (Exception ignored) {
+                        }
                         System.out.println("Card verified");
                     }
                     welcome.clear();
-
-
-                } catch (IOException e) {
-
-                } /*finally {
+                }
+            } catch (IOException e) {
+                System.out.println("A client left.");
+            } finally {
                 try {
+                    db.closeConnection();
                     socket.close();
                 } catch (IOException e) {
-                    log("Couldn't close a socket");
+                    System.out.println("Couldn't close a socket.");
                 }
-            }*/
+            }
         }
 
     }

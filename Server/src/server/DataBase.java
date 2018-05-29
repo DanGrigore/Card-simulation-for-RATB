@@ -7,6 +7,7 @@ import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 
 
 public class DataBase {
@@ -15,8 +16,8 @@ public class DataBase {
 
     private DataBase() {
         final String DB_URL = "jdbc:mysql://sql2.freemysqlhosting.net:3306/sql2237743";
-        final String DB_USER = "sql2237743";
-        final String DB_PASS = "mW8%wB5!";
+        final String DB_USER = "-";
+        final String DB_PASS = "-";
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -26,6 +27,14 @@ public class DataBase {
 
         try {
             myConn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void closeConnection() {
+        try {
+            myConn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -59,6 +68,7 @@ public class DataBase {
 
         try (PreparedStatement ps = myConn.prepareStatement("INSERT INTO CLIENT(first_name,last_name) VALUES(?,?);");
              PreparedStatement ps2 = myConn.prepareStatement("SELECT client_id FROM CLIENT WHERE first_name = ? AND last_name = ?");
+
              PreparedStatement ps3 = myConn.prepareStatement("INSERT INTO CARD(card_money,expire_on,client_id) VALUES(0,null,?);");
              PreparedStatement ps4 = myConn.prepareStatement("SELECT card_id FROM CARD WHERE client_id = ?");
              PreparedStatement ps5 = myConn.prepareStatement("INSERT INTO CARD_TYPE(pass_type,price,card_id) VALUES('recharge',null,?);")) {
@@ -69,8 +79,8 @@ public class DataBase {
 
             ps2.setString(1, firstName);
             ps2.setString(2, lastName);
-            ResultSet rs = ps2.executeQuery();
 
+            ResultSet rs = ps2.executeQuery();
             rs.next();
             int client_id = rs.getInt("client_id");
 
@@ -93,7 +103,7 @@ public class DataBase {
     }
 
     public void chargePass(Card card) {
-        Client person = new Client();
+        Client person;
         person = card.getPerson();
 
         try (PreparedStatement ps = myConn.prepareStatement("SELECT cr.card_id FROM CLIENT cl, CARD cr WHERE cl.client_id = cr.client_id AND cl.first_name = ? AND cl.last_name = ?;");
@@ -137,7 +147,7 @@ public class DataBase {
     }
 
     public void validateCard(Card card) {
-        Client person = new Client();
+        Client person;
         person = card.getPerson();
 
         try (PreparedStatement ps = myConn.prepareStatement("SELECT cr.card_id, cr.card_money, cr.expire_on, ct.pass_type FROM CLIENT cl, CARD cr, CARD_TYPE ct WHERE cl.client_id = cr.client_id AND cl.first_name = ? AND cl.last_name = ? AND ct.card_id = cr.card_id;");
@@ -154,6 +164,7 @@ public class DataBase {
             card.setPass_type(rs.getString("ct.pass_type"));
             card.setExpireDate(rs.getString("cr.expire_on"));
 
+
             ps2.setInt(1, card.getLine_validation());
             ResultSet rs2 = ps2.executeQuery();
             rs2.next();
@@ -163,9 +174,11 @@ public class DataBase {
 
             if (!card.getPass_type().equals("Rechargeable"))
                 try {
-                    Date expireDate = (Date) format.parse(card.getExpireDate());
-                    Date todayDate = (Date) format.parse(LocalDate.now().toString());
-                    if (expireDate.compareTo(todayDate) >= 0) {
+                    System.out.println(card.getExpireDate());
+                    Date expireDate = format.parse(card.getExpireDate());
+                    System.out.println(card.getExpireDate());
+                    Date todayDate = format.parse(LocalDate.now().toString());
+                    if (expireDate.compareTo(todayDate) <= 0) {
                         ps3.setInt(1, card.getCard_id());
                         ps3.setInt(2, transportLine);
                         ps3.executeUpdate();
@@ -192,7 +205,7 @@ public class DataBase {
     }
 
     public Boolean verifyCard(Card card) {
-        Client person = new Client();
+        Client person;
         person = card.getPerson();
 
         try (PreparedStatement ps = myConn.prepareStatement("SELECT cr.card_id FROM CLIENT cl, CARD cr WHERE cl.client_id = cr.client_id AND cl.first_name = ? AND cl.last_name = ?;");
@@ -210,7 +223,7 @@ public class DataBase {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 String validationDate = sdf.format(rs2.getTimestamp("v.date&time"));
                 String now = LocalDate.now().toString();
-//                System.out.println(validationDate);
+
                 if (now.equals(validationDate))
                     if (rs2.getInt("t.line") == card.getLine_validation())
                         return true;
