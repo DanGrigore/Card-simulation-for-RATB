@@ -32,6 +32,8 @@ public class DataBase {
         }
     }
 
+    // GRIGORE DAN-ANDREI 6
+    
     public void closeConnection() {
         try {
             myConn.close();
